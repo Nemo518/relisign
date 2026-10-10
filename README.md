@@ -112,3 +112,7 @@ view/
   year={2025}
 }
 ```
+
+---
+
+🤖 Built with the assistance of [Claude Code](https://claude.com/claude-code).
