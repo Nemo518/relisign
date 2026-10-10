@@ -1,8 +1,8 @@
-<h3 align="center"><a href="" style="color:#9C276A">
-Uni-Sign: Toward Unified Sign Language Understanding at Scale</a></h3>
-<h5 align="center"> 
-If our project helps you, please give us a star🌟 on GitHub, that would motivate us a lot!
-</h2>
+<h1 align="center">ReliSign</h1>
+<h3 align="center">可靠性感知多模态手语翻译系统</h3>
+<h5 align="center">Reliability-aware Multimodal Sign Language Translation</h5>
+<h5 align="center"><em>Built upon <a href="https://arxiv.org/abs/2501.15187">Uni-Sign</a> (ICLR 2025)</em></h5>
+<h5 align="center">如果这个项目对你有帮助，欢迎点一个 star 🌟</h5>
 
 <h5 align="center">
 
@@ -28,11 +28,29 @@ If our project helps you, please give us a star🌟 on GitHub, that would motiva
 [//]: # ([![PWC]&#40;https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/uni-sign-toward-unified-sign-language/gloss-free-sign-language-translation-on-3&#41;]&#40;https://paperswithcode.com/sota/gloss-free-sign-language-translation-on-3?p=uni-sign-toward-unified-sign-language&#41;)
 </h5>
 
+---
+
+## 🧭 项目定位 / What is ReliSign
+
+**ReliSign** 是一个**可靠性感知的多模态手语翻译系统**：在 [Uni-Sign](https://arxiv.org/abs/2501.15187)（ICLR 2025，基于骨骼的连续手语翻译框架）之上，围绕「可靠性感知融合」完成了算法创新与系统落地。**新增原创代码 10,000+ 行**，Uni-Sign 基础骨架（ST-GCN + mT5 解码器 + CSL-News 数据集）约占 20%。
+
+> **ReliSign** is a reliability-aware multimodal sign language translation system built on top of [Uni-Sign](https://arxiv.org/abs/2501.15187) (ICLR 2025).
+
+## ✨ 本项目核心贡献 / Core Contributions
+
+| 创新点 | 说明 | 代码位置 |
+|---|---|---|
+| **不确定性感知融合门控**<br>Uncertainty-Aware Fusion Gate | 由「手部置信度 + 选择密度 + 手部存在率」组成的 3D 元数据驱动 `Conv1D→GELU→Conv1D+Sigmoid` 门控，动态调节 RGB 贡献权重，解决遮挡 / 光照 / 运动模糊下盲目融合的噪声问题 | `models.py` |
+| **PGF 姿态引导融合**<br>Pose-Guided Fusion | 以归一化手部关键点坐标为几何先验，驱动 `DeformableAttention2D` 在 RGB 特征图上采样相关区域，显式对齐姿态与 RGB | `models.py` · `deformable_attention_2d.py` |
+| **置信度引导手部帧选择**<br>Confidence-Guided Hand Frame Selection | 4 种策略（confidence_topk / confidence_weighted / uniform / random）从长视频中选取高质量手部帧 | `datasets.py` |
+
+**系统工程**：FastAPI 后端（16 端点 + XAI 可解释性）+ Vue3 前端 + 实时摄像头演示 + 模型归因分析 + 智能纠错学习 + 用户历史管理 + 边缘部署（Docker / ONNX）。
+
+## 🔗 继承的基础 / Built upon Uni-Sign
+
+基础骨架与数据集来自 [Uni-Sign: Toward Unified Sign Language Understanding at Scale](https://arxiv.org/abs/2501.15187)（ICLR 2025）：**ST-GCN 姿态编码器、mT5 解码器、CSL-News 数据集**。安装、数据准备、训练与评估请见下方「Uni-Sign 基础」部分。
+
 ## 🎥 系统演示 / Demo
-
-**ReliSign** 是一个多模态手语翻译系统（基于 Uni-Sign），支持实时摄像头手语识别、骨架可视化、语音播报、模型归因分析、智能纠错学习与用户历史管理。
-
-> **ReliSign** is a multimodal sign language translation system built on top of Uni-Sign.
 
 ![实时演示 Demo](assets/demo.gif)
 
@@ -45,7 +63,15 @@ If our project helps you, please give us a star🌟 on GitHub, that would motiva
 
 📹 完整演示视频：[assets/demo.mp4](./assets/demo.mp4)（点击在线播放，或下载后观看）
 
-![Uni-Sign](docs/design/framework.png)
+## 🏗️ 整体框架 / Framework
+
+![ReliSign 框架](docs/design/relisign_framework.png)
+
+---
+
+## 🔬 Uni-Sign 基础（Baseline）
+
+以下内容来自所继承的 [Uni-Sign](https://arxiv.org/abs/2501.15187)（ICLR 2025）基础框架：更新日志、安装、数据准备、模型检查点、训练与评估、引用。
 
 ## 💥 News
 [2025/1/25] This [paper](https://openreview.net/pdf?id=0Xt7uT04cQ) is accepted by `ICLR 2025` 🎉🎉!
