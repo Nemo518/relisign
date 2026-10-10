@@ -1,0 +1,237 @@
+<svg width="1800" height="1000" viewBox="0 0 1800 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50"/>
+    </marker>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1800" height="1000" fill="#fafbfc"/>
+
+  <!-- Title -->
+  <text x="900" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#2c3e50" font-family="Arial, sans-serif">
+    Uni-Sign Framework for Continuous Sign Language Understanding
+  </text>
+
+  <!-- Input Section -->
+  <g transform="translate(50, 100)">
+    <rect x="0" y="0" width="200" height="120" rx="10" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" filter="url(#shadow)"/>
+    <text x="100" y="35" text-anchor="middle" font-size="16" font-weight="bold" fill="#1565c0">Input Video</text>
+    <text x="100" y="60" text-anchor="middle" font-size="12" fill="#424242">Continuous Sign</text>
+    <text x="100" y="80" text-anchor="middle" font-size="12" fill="#424242">Language Sequence</text>
+    <text x="100" y="100" text-anchor="middle" font-size="11" fill="#757575">T frames</text>
+  </g>
+
+  <!-- Pose Extraction -->
+  <g transform="translate(300, 100)">
+    <rect x="0" y="0" width="220" height="120" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2" filter="url(#shadow)"/>
+    <text x="110" y="35" text-anchor="middle" font-size="16" font-weight="bold" fill="#e65100">Pose Extraction</text>
+    <text x="110" y="60" text-anchor="middle" font-size="12" fill="#424242">Whole-body Keypoints</text>
+    <text x="110" y="80" text-anchor="middle" font-size="12" fill="#424242">(x, y, confidence)</text>
+    <text x="110" y="100" text-anchor="middle" font-size="11" fill="#757575">133 keypoints/frame</text>
+  </g>
+
+  <!-- Decomposition -->
+  <g transform="translate(570, 80)">
+    <rect x="0" y="0" width="240" height="160" rx="10" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" filter="url(#shadow)"/>
+    <text x="120" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#6a1b9a">Sub-structure Decomposition</text>
+
+    <rect x="15" y="45" width="100" height="35" rx="5" fill="#e1bee7" stroke="#9c27b0" stroke-width="1.5"/>
+    <text x="65" y="68" text-anchor="middle" font-size="12" fill="#4a148c">Body (9 pts)</text>
+
+    <rect x="125" y="45" width="100" height="35" rx="5" fill="#e1bee7" stroke="#9c27b0" stroke-width="1.5"/>
+    <text x="175" y="68" text-anchor="middle" font-size="12" fill="#4a148c">Face (14 pts)</text>
+
+    <rect x="15" y="90" width="100" height="35" rx="5" fill="#e1bee7" stroke="#9c27b0" stroke-width="1.5"/>
+    <text x="65" y="113" text-anchor="middle" font-size="12" fill="#4a148c">Left Hand (21 pts)</text>
+
+    <rect x="125" y="90" width="100" height="35" rx="5" fill="#e1bee7" stroke="#9c27b0" stroke-width="1.5"/>
+    <text x="175" y="113" text-anchor="middle" font-size="12" fill="#4a148c">Right Hand (21 pts)</text>
+
+    <rect x="15" y="135" width="210" height="20" rx="3" fill="#ce93d8" opacity="0.5"/>
+    <text x="120" y="150" text-anchor="middle" font-size="10" fill="#4a148c">Normalization &amp; Confidence Filtering</text>
+  </g>
+
+  <!-- RGB Support Branch -->
+  <g transform="translate(570, 280)">
+    <rect x="0" y="0" width="240" height="140" rx="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" stroke-dasharray="8,4" filter="url(#shadow)"/>
+    <text x="120" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#2e7d32">RGB Support (Optional)</text>
+
+    <rect x="15" y="45" width="210" height="30" rx="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5"/>
+    <text x="120" y="65" text-anchor="middle" font-size="12" fill="#1b5e20">Hand Region Cropping</text>
+
+    <rect x="15" y="85" width="210" height="30" rx="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5"/>
+    <text x="120" y="105" text-anchor="middle" font-size="12" fill="#1b5e20">EfficientNet-B0 Backbone</text>
+
+    <text x="120" y="130" text-anchor="middle" font-size="10" fill="#558b2f">112×112 hand patches</text>
+  </g>
+
+  <!-- Spatial GCN -->
+  <g transform="translate(860, 80)">
+    <rect x="0" y="0" width="280" height="340" rx="10" fill="url(#grad1)" opacity="0.1" stroke="#667eea" stroke-width="2" filter="url(#shadow)"/>
+    <text x="140" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#5e35b1">Spatial-Temporal Pose Encoding</text>
+
+    <!-- Body Branch -->
+    <g transform="translate(10, 50)">
+      <rect x="0" y="0" width="120" height="120" rx="8" fill="#ffffff" stroke="#667eea" stroke-width="1.5"/>
+      <text x="60" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#5e35b1">Body Branch</text>
+      <text x="60" y="50" text-anchor="middle" font-size="11" fill="#424242">Linear Proj: 3→64</text>
+      <text x="60" y="70" text-anchor="middle" font-size="11" fill="#424242">Spatial ST-GCN</text>
+      <text x="60" y="90" text-anchor="middle" font-size="10" fill="#757575">64→128→256</text>
+      <text x="60" y="110" text-anchor="middle" font-size="10" fill="#757575">Temporal ST-GCN</text>
+    </g>
+
+    <!-- Left Hand Branch -->
+    <g transform="translate(140, 50)">
+      <rect x="0" y="0" width="130" height="120" rx="8" fill="#ffffff" stroke="#667eea" stroke-width="1.5"/>
+      <text x="65" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#5e35b1">Left Hand Branch</text>
+      <text x="65" y="50" text-anchor="middle" font-size="11" fill="#424242">Linear Proj: 3→64</text>
+      <text x="65" y="70" text-anchor="middle" font-size="11" fill="#424242">Spatial ST-GCN</text>
+      <text x="65" y="90" text-anchor="middle" font-size="10" fill="#757575">+ Body Context</text>
+      <text x="65" y="110" text-anchor="middle" font-size="10" fill="#757575">Temporal ST-GCN</text>
+    </g>
+
+    <!-- Right Hand Branch -->
+    <g transform="translate(10, 180)">
+      <rect x="0" y="0" width="130" height="120" rx="8" fill="#ffffff" stroke="#667eea" stroke-width="1.5"/>
+      <text x="65" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#5e35b1">Right Hand Branch</text>
+      <text x="65" y="50" text-anchor="middle" font-size="11" fill="#424242">Linear Proj: 3→64</text>
+      <text x="65" y="70" text-anchor="middle" font-size="11" fill="#424242">Spatial ST-GCN</text>
+      <text x="65" y="90" text-anchor="middle" font-size="10" fill="#757575">+ Body Context</text>
+      <text x="65" y="110" text-anchor="middle" font-size="10" fill="#757575">Temporal ST-GCN</text>
+    </g>
+
+    <!-- Face Branch -->
+    <g transform="translate(150, 180)">
+      <rect x="0" y="0" width="120" height="120" rx="8" fill="#ffffff" stroke="#667eea" stroke-width="1.5"/>
+      <text x="60" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#5e35b1">Face Branch</text>
+      <text x="60" y="50" text-anchor="middle" font-size="11" fill="#424242">Linear Proj: 3→64</text>
+      <text x="60" y="70" text-anchor="middle" font-size="11" fill="#424242">Spatial ST-GCN</text>
+      <text x="60" y="90" text-anchor="middle" font-size="10" fill="#757575">+ Body Context</text>
+      <text x="60" y="110" text-anchor="middle" font-size="10" fill="#757575">Temporal ST-GCN</text>
+    </g>
+  </g>
+
+  <!-- PGF Module -->
+  <g transform="translate(1190, 150)">
+    <rect x="0" y="0" width="280" height="200" rx="10" fill="url(#grad2)" opacity="0.15" stroke="#f5576c" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="140" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#c2185b">Pose-Guided Fusion (PGF)</text>
+
+    <rect x="15" y="45" width="250" height="35" rx="5" fill="#fce4ec" stroke="#f5576c" stroke-width="1.5"/>
+    <text x="140" y="68" text-anchor="middle" font-size="12" fill="#880e4f">Deformable Attention 2D</text>
+
+    <rect x="15" y="90" width="250" height="35" rx="5" fill="#fce4ec" stroke="#f5576c" stroke-width="1.5"/>
+    <text x="140" y="113" text-anchor="middle" font-size="12" fill="#880e4f">Cross-Attention: Pose ↔ RGB</text>
+
+    <rect x="15" y="135" width="250" height="35" rx="5" fill="#fce4ec" stroke="#f5576c" stroke-width="1.5"/>
+    <text x="140" y="158" text-anchor="middle" font-size="12" fill="#880e4f">Uncertainty-Aware Gating</text>
+
+    <text x="140" y="185" text-anchor="middle" font-size="10" fill="#ad1457">Meta: confidence, density, presence</text>
+  </g>
+
+  <!-- Feature Concatenation -->
+  <g transform="translate(860, 460)">
+    <rect x="0" y="0" width="610" height="80" rx="10" fill="#fff8e1" stroke="#ffa000" stroke-width="2" filter="url(#shadow)"/>
+    <text x="305" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#f57c00">Feature Concatenation &amp; Projection</text>
+    <text x="305" y="55" text-anchor="middle" font-size="12" fill="#424242">Concat: [Body | Left | Right | Face] → Linear(1024→768)</text>
+    <text x="305" y="72" text-anchor="middle" font-size="11" fill="#757575">Part-specific learnable parameters + Temporal pooling</text>
+  </g>
+
+  <!-- mT5 Decoder -->
+  <g transform="translate(860, 580)">
+    <rect x="0" y="0" width="610" height="140" rx="10" fill="url(#grad3)" opacity="0.15" stroke="#0288d1" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="305" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#01579b">mT5 Sequence Generation Decoder</text>
+
+    <rect x="20" y="55" width="270" height="35" rx="5" fill="#b3e5fc" stroke="#0288d1" stroke-width="1.5"/>
+    <text x="155" y="78" text-anchor="middle" font-size="12" fill="#01579b">Task Prompt: "Translate sign to Chinese"</text>
+
+    <rect x="320" y="55" width="270" height="35" rx="5" fill="#b3e5fc" stroke="#0288d1" stroke-width="1.5"/>
+    <text x="455" y="78" text-anchor="middle" font-size="12" fill="#01579b">Beam Search Decoding (beam=4)</text>
+
+    <text x="305" y="110" text-anchor="middle" font-size="11" fill="#0277bd">Pretrained multilingual language model with frozen/fine-tuned parameters</text>
+    <text x="305" y="128" text-anchor="middle" font-size="11" fill="#0277bd">Output: Natural language text or gloss sequence</text>
+  </g>
+
+  <!-- Output -->
+  <g transform="translate(1520, 620)">
+    <rect x="0" y="0" width="200" height="100" rx="10" fill="#e8f5e9" stroke="#43a047" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="100" y="35" text-anchor="middle" font-size="16" font-weight="bold" fill="#2e7d32">Output</text>
+    <text x="100" y="60" text-anchor="middle" font-size="12" fill="#1b5e20">Chinese Text</text>
+    <text x="100" y="80" text-anchor="middle" font-size="12" fill="#1b5e20">or Gloss Labels</text>
+  </g>
+
+  <!-- Arrows -->
+  <!-- Input to Pose -->
+  <line x1="250" y1="160" x2="300" y2="160" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Pose to Decomposition -->
+  <line x1="520" y1="160" x2="570" y2="160" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Decomposition to Pose Encoding -->
+  <line x1="810" y1="160" x2="860" y2="160" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+
+  <!-- RGB to PGF -->
+  <line x1="810" y1="350" x2="1190" y2="250" stroke="#4caf50" stroke-width="2.5" stroke-dasharray="8,4" marker-end="url(#arrowhead)"/>
+
+  <!-- Pose Encoding to PGF -->
+  <line x1="1140" y1="250" x2="1190" y2="250" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+
+  <!-- PGF to Concatenation -->
+  <path d="M 1330 350 L 1330 420 L 1165 420 L 1165 460" stroke="#2c3e50" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Pose Encoding to Concatenation -->
+  <line x1="1000" y1="420" x2="1000" y2="460" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Concatenation to mT5 -->
+  <line x1="1165" y1="540" x2="1165" y2="580" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+
+  <!-- mT5 to Output -->
+  <line x1="1470" y1="650" x2="1520" y2="650" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Legend -->
+  <g transform="translate(50, 850)">
+    <rect x="0" y="0" width="1700" height="130" rx="8" fill="#ffffff" stroke="#bdbdbd" stroke-width="1.5"/>
+    <text x="20" y="30" font-size="14" font-weight="bold" fill="#424242">Legend:</text>
+
+    <rect x="30" y="50" width="30" height="20" rx="4" fill="#e3f2fd" stroke="#2196f3" stroke-width="1.5"/>
+    <text x="70" y="65" font-size="12" fill="#424242">Input Data</text>
+
+    <rect x="200" y="50" width="30" height="20" rx="4" fill="#fff3e0" stroke="#ff9800" stroke-width="1.5"/>
+    <text x="240" y="65" font-size="12" fill="#424242">Preprocessing</text>
+
+    <rect x="370" y="50" width="30" height="20" rx="4" fill="url(#grad1)" opacity="0.3" stroke="#667eea" stroke-width="1.5"/>
+    <text x="410" y="65" font-size="12" fill="#424242">Pose Encoder (ST-GCN)</text>
+
+    <rect x="620" y="50" width="30" height="20" rx="4" fill="url(#grad2)" opacity="0.3" stroke="#f5576c" stroke-width="1.5"/>
+    <text x="660" y="65" font-size="12" fill="#424242">Multimodal Fusion (PGF)</text>
+
+    <rect x="920" y="50" width="30" height="20" rx="4" fill="url(#grad3)" opacity="0.3" stroke="#0288d1" stroke-width="1.5"/>
+    <text x="960" y="65" font-size="12" fill="#424242">Language Model (mT5)</text>
+
+    <rect x="1200" y="50" width="30" height="20" rx="4" fill="#e8f5e9" stroke="#43a047" stroke-width="1.5"/>
+    <text x="1240" y="65" font-size="12" fill="#424242">Output</text>
+
+    <line x1="30" y1="95" x2="80" y2="95" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+    <text x="90" y="100" font-size="12" fill="#424242">Data Flow</text>
+
+    <line x1="250" y1="95" x2="300" y2="95" stroke="#4caf50" stroke-width="2.5" stroke-dasharray="8,4" marker-end="url(#arrowhead)"/>
+    <text x="310" y="100" font-size="12" fill="#424242">Optional RGB Path</text>
+
+    <text x="20" y="120" font-size="11" fill="#757575">Key Innovation: Unified pose-driven representation with optional hand-centric RGB enhancement and uncertainty-aware fusion for robust continuous sign language understanding.</text>
+  </g>
+</svg>

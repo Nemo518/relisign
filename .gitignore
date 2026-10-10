@@ -1,0 +1,85 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+*.so
+
+# ===== 虚拟环境 / 第三方依赖 =====
+.venv/
+venv/
+.vendor/
+.vendor_py/
+node_modules/
+
+# ===== 构建产物 =====
+dist/
+vue-dist/
+build/
+
+# ===== 本地配置 & 密钥（勿提交）=====
+paths.local.json
+*.local.json
+.env
+.env.*
+script/1.py
+
+# ===== 数据 / 数据库 / 日志 =====
+*.db
+*.sqlite
+*.sqlite3
+*.log
+log/
+out/
+wandb/
+backup/
+
+# ===== 模型权重 / 大文件 =====
+*.pth
+*.ckpt
+*.pt
+*.onnx
+*.safetensors
+*.bin
+
+# ===== 第三方二进制 / 模型（应通过 npm/pip 安装）=====
+*.wasm
+*.task
+*.tflite
+view/archive/web/public/mediapipe-wasm/
+view/archive/*.png
+
+# ===== 视频 / 图片 / 表格 / 笔记（本地工作文件）=====
+*.mp4
+tools/*.jpg
+tools/*.mp4
+*.xlsx
+*.ipynb
+
+# ===== 论文稿件 / 投稿 / 竞赛材料（不公开）=====
+docs/03_论文与投稿/
+docs/04_论文稿件/
+docs/archive/
+docs/papers/
+iCAN提交材料/
+iCAN提交材料.zip
+
+# ===== 临时 / 生成目录 =====
+tmp/
+tmp*/
+.tmp*/
+
+# ===== IDE / 编辑器 / 工具 =====
+.idea/
+.vscode/
+.claude/
+.DS_Store
+Thumbs.db
+*.swp
+
+# ===== 其他 =====
+core*
+pre_training.py
+
+# ===== 演示素材（README 展示用，允许提交）=====
+!assets/demo.mp4

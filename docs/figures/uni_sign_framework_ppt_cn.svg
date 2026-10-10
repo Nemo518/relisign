@@ -1,0 +1,71 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow2" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,4 L0,8 Z" fill="#2d2d2d"/>
+    </marker>
+    <style>
+      .title { font: 700 34px 'Microsoft YaHei', 'PingFang SC', sans-serif; fill:#111; }
+      .big { font: 700 24px 'Microsoft YaHei', 'PingFang SC', sans-serif; fill:#17212b; }
+      .mid { font: 600 18px 'Microsoft YaHei', 'PingFang SC', sans-serif; fill:#26323f; }
+      .small { font: 500 16px 'Microsoft YaHei', 'PingFang SC', sans-serif; fill:#34414d; }
+      .box { stroke-width:3; rx:24; ry:24; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="900" fill="#ffffff"/>
+  <text x="60" y="70" class="title">中文连续手语识别与翻译系统总体架构</text>
+
+  <rect x="80" y="150" width="280" height="140" fill="#dff1ff" stroke="#4e9ad1" class="box"/>
+  <text x="165" y="200" class="big">1 数据输入层</text>
+  <text x="125" y="238" class="mid">手语视频 / CE-CSL 数据集</text>
+  <text x="124" y="268" class="small">中文句子、Gloss、视频路径</text>
+
+  <rect x="410" y="150" width="280" height="140" fill="#e5f8e8" stroke="#63b071" class="box"/>
+  <text x="495" y="200" class="big">2 预处理层</text>
+  <text x="462" y="238" class="mid">姿态提取 / 标签转换</text>
+  <text x="470" y="268" class="small">pose_format 与 labels 生成</text>
+
+  <rect x="740" y="150" width="280" height="140" fill="#fff5d9" stroke="#d2a53c" class="box"/>
+  <text x="825" y="200" class="big">3 数据组织层</text>
+  <text x="780" y="238" class="mid">S2T_Dataset / batch 构造</text>
+  <text x="770" y="268" class="small">src_input 与 tgt_input 封装</text>
+
+  <rect x="1070" y="150" width="280" height="140" fill="#ffe7ec" stroke="#dc6f87" class="box"/>
+  <text x="1155" y="200" class="big">4 模型理解层</text>
+  <text x="1140" y="238" class="mid">Uni-Sign 编码器</text>
+  <text x="1110" y="268" class="small">时序建模 / 多分支融合 / 统一语义表示</text>
+
+  <rect x="410" y="390" width="300" height="140" fill="#efe7ff" stroke="#8768de" class="box"/>
+  <text x="505" y="440" class="big">5 语言生成层</text>
+  <text x="530" y="478" class="mid">mT5 解码器</text>
+  <text x="470" y="508" class="small">将手语语义表示翻译为中文文本</text>
+
+  <rect x="790" y="390" width="300" height="140" fill="#e8faf0" stroke="#58ad76" class="box"/>
+  <text x="885" y="440" class="big">6 输出应用层</text>
+  <text x="835" y="478" class="mid">中文翻译 / Gloss 结果 / Demo 展示</text>
+  <text x="872" y="508" class="small">比赛演示与系统推理</text>
+
+  <rect x="1140" y="380" width="330" height="160" fill="#fff0f0" stroke="#e04f4f" class="box"/>
+  <text x="1215" y="432" class="big">当前推荐主线</text>
+  <text x="1224" y="474" class="mid">CE-CSL + pose-only + SLT</text>
+  <text x="1188" y="508" class="small">先做中文场景适配，再做评估与扩展</text>
+
+  <rect x="220" y="650" width="470" height="150" fill="#f7f7f7" stroke="#9a9a9a" class="box"/>
+  <text x="380" y="700" class="big">训练主线</text>
+  <text x="270" y="740" class="mid">fine_tuning.py + DeepSpeed</text>
+  <text x="285" y="772" class="small">加载现成 checkpoint，在 CE-CSL 上继续微调</text>
+
+  <rect x="830" y="650" width="470" height="150" fill="#f2fbff" stroke="#66aeca" class="box"/>
+  <text x="995" y="700" class="big">推理主线</text>
+  <text x="885" y="740" class="mid">test_cecsl_forward.py / online_inference.py</text>
+  <text x="915" y="772" class="small">验证最小前向、展示中文翻译效果</text>
+
+  <line x1="360" y1="220" x2="410" y2="220" stroke="#2d2d2d" stroke-width="4" marker-end="url(#arrow2)"/>
+  <line x1="690" y1="220" x2="740" y2="220" stroke="#2d2d2d" stroke-width="4" marker-end="url(#arrow2)"/>
+  <line x1="1020" y1="220" x2="1070" y2="220" stroke="#2d2d2d" stroke-width="4" marker-end="url(#arrow2)"/>
+  <line x1="1210" y1="290" x2="1210" y2="340" stroke="#2d2d2d" stroke-width="4" marker-end="url(#arrow2)"/>
+  <line x1="1210" y1="340" x2="710" y2="460" stroke="#2d2d2d" stroke-width="4" marker-end="url(#arrow2)"/>
+  <line x1="1090" y1="460" x2="1140" y2="460" stroke="#2d2d2d" stroke-width="4" marker-end="url(#arrow2)"/>
+  <line x1="560" y1="530" x2="560" y2="650" stroke="#2d2d2d" stroke-width="4" marker-end="url(#arrow2)"/>
+  <line x1="940" y1="530" x2="1065" y2="650" stroke="#2d2d2d" stroke-width="4" marker-end="url(#arrow2)"/>
+</svg>

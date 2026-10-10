@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RGB-Pose Fusion Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.3/dist/mermaid.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .diagram { border: 1px solid #ccc; padding: 20px; margin: 20px 0; }
+        button { margin: 10px; padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <h1>Reliability-Aware RGB-Pose Fusion System</h1>
+
+    <button onclick="showOverview()">System Overview</button>
+    <button onclick="showDetailed()">Detailed Architecture</button>
+    <button onclick="showFusion()">Fusion Mechanism</button>
+
+    <div class="diagram" id="diagram">
+        <div class="mermaid">
+            graph TB
+                A[Input] --> B[Feature Extraction]
+                B --> C[Fusion Gate ⭐]
+                C --> D[Decoder]
+                D --> E[Output]
+                style C fill:#ffeb3b
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+
+        function showOverview() {
+            document.getElementById('diagram').innerHTML = `
+                <div class="mermaid">
+                    graph TB
+                        A[Input: Pose + RGB + Confidence] --> B[Feature Extraction<br/>STGCN + ViT]
+                        B --> C[Uncertainty-Aware<br/>Fusion Gate ⭐]
+                        C --> D[mT5 Decoder]
+                        D --> E[Chinese Translation]
+                        style C fill:#ffeb3b,stroke:#f57c00,stroke-width:3px
+                </div>
+            `;
+            mermaid.init(undefined, document.querySelector('.mermaid'));
+        }
+
+        function showDetailed() {
+            document.getElementById('diagram').innerHTML = `
+                <div class="mermaid">
+                    flowchart TD
+                        A1["Hand Pose"] --> B1["STGCN"]
+                        A2["Confidence"] --> B2["Frame Selection"]
+                        A3["RGB Crops"] --> B3["ViT"]
+                        B1 --> C1["p_t"]
+                        B3 --> C2["r_t"]
+                        A2 --> C3["u_t"]
+                        C1 --> C4["Fusion Gate"]
+                        C2 --> C4
+                        C3 --> C4
+                        C4 --> D1["h_t"]
+                        D1 --> D2["mT5"]
+                        D2 --> D3["Output"]
+                        style C4 fill:#ffeb3b
+                </div>
+            `;
+            mermaid.init(undefined, document.querySelector('.mermaid'));
+        }
+
+        function showFusion() {
+            document.getElementById('diagram').innerHTML = `
+                <div class="mermaid">
+                    graph TD
+                        A["p_t"] --> C["Concat"]
+                        B["r_t"] --> C
+                        D["u_t"] --> C
+                        C --> E["MLP + ReLU"]
+                        E --> F["Linear"]
+                        F --> G["Sigmoid alpha_t"]
+                        G --> H["Blend h_t"]
+                        H --> I["Output"]
+                        style G fill:#ffeb3b
+                </div>
+            `;
+            mermaid.init(undefined, document.querySelector('.mermaid'));
+        }
+    </script>
+</body>
+</html>

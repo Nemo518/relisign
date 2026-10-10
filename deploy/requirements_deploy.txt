@@ -1,0 +1,21 @@
+# ============================================================
+# Uni-Sign 部署依赖
+# 安装方式: pip install -r deploy/requirements_deploy.txt
+# ============================================================
+
+# ---- 量化支持 ----
+bitsandbytes>=0.41.0          # INT8/INT4 量化（必需）
+
+# ---- Web 服务 ----
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+python-multipart>=0.0.6       # 文件上传支持
+
+# ---- 原有依赖（训练时已安装，部署时确认） ----
+# torch>=2.1.1                  # 深度学习框架
+# transformers>=4.40.0          # mT5 模型
+# einops>=0.6.1                 # 张量操作
+# numpy>=1.22.4                 # 数值计算
+# opencv-python>=4.6.0          # 图像处理（RGB 支持时需要）
+# decord>=0.6.0                 # 视频解码（RGB 支持时需要）
+# torchvision>=0.16.1           # EfficientNet-B0（RGB 支持时需要）

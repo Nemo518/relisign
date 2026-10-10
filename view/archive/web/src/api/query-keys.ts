@@ -1,0 +1,18 @@
+export const queryKeys = {
+  health: ["health"] as const,
+  sampleVideos: ["sample-videos"] as const,
+  bestExamples: (split: string) => ["best-examples", split] as const,
+  trainingHistory: ["training-history"] as const,
+  metricCards: (split: string) => ["metric-cards", split] as const,
+  metricsSummary: (split: string) => ["metrics-summary", split] as const,
+  errorAnalysis: (label: string) => ["error-analysis", label] as const,
+  confusionArtifacts: (label: string) => ["confusion-artifacts", label] as const,
+  videoMetadata: (path: string) => ["video-metadata", path] as const,
+  cachedPrediction: (sampleId: string) => ["cached-prediction", sampleId] as const,
+  modelRadar: (split: string) => ["model-radar", split] as const,
+  latencyBreakdown: (latencyS: number) => ["latency-breakdown", latencyS] as const,
+  errorCategoryFrame: (label: string) => ["error-category-frame", label] as const,
+  poseSequence: (videoPath: string) => ["pose-sequence", videoPath] as const,
+  allExperiments: (split: string) => ["all-experiments", split] as const,
+  datasets: ["datasets"] as const,
+};

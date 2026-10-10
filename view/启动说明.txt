@@ -1,0 +1,100 @@
+============================================
+  ReliSign 智能手语识别系统 — 启动说明
+============================================
+
+【快速启动 — 推荐方式】
+
+  打开终端执行:
+
+  cd E:\project\xiaozhi\Uni-Sign
+  C:\Users\Nemo518\.conda\envs\torch13\python.exe view\web_app\app.py
+
+  浏览器访问: http://localhost:8001
+
+
+【给评委演示 — 守护模式 (崩溃自动重启)】
+
+  PowerShell 执行:
+
+  cd E:\project\xiaozhi\Uni-Sign
+  powershell -ExecutionPolicy Bypass -File view\start_daemon.ps1
+
+
+【演示注意事项 — GPU显存管理 (2026-07-20 已优化)】
+
+  ★ 系统已内置自动显存管理:
+    - 切换标签时自动释放/恢复GPU模型 (~2.2GB)
+    - 语音识别(STT)强制使用CPU，不与模型抢显存
+    - 姿态估计器智能选择设备 (显存<3GB时自动用CPU)
+
+  ★ 演示顺序建议:
+    1. 先打开"实时演示"，让模型加载到GPU
+    2. 完成实时手语识别演示
+    3. 切换到其他页面(模型展示/归因分析等) — 自动释放显存
+    4. 再切回"实时演示" — 自动恢复模型
+
+  ★ 当前使用模型: Stage3 姿态专用模型 (rgb_support=False)
+    - 纯姿态输入，无RGB分支干扰，实时识别准确度最优
+    - 备选: Round6 (rgb_support=True, 需真实手部RGB数据)
+    - 可在 app.py load_model_if_needed() 中调整 candidates 顺序切换
+
+  ★ 如果遇到卡顿:
+    - 刷新浏览器页面即可 (模型会延迟重载)
+    - 或访问 http://localhost:8001/api/model/cleanup 手动清理显存
+    - 查看显存状态: http://localhost:8001/api/vram
+
+  ★ 硬件环境:
+    - GPU: RTX 5060 Laptop (8GB VRAM)
+    - 模型占用: ~2.2GB (27.8%)
+    - 空闲显存: ~5.8GB (充足)
+
+
+【目录结构】
+
+  view/
+  ├── web_app/          ★ 现行主应用 (FastAPI + WebSocket)
+  │   ├── app.py            后端服务主程序
+  │   ├── vue-dist/         前端构建产物
+  │   └── ...
+  ├── web-frontend/     Vue.js 前端源码 (修改后需 npm run build)
+  ├── archive/          已归档的旧 Streamlit 系统
+  ├── inference_adapter.py  在线推理适配器
+  ├── xai_service.py    XAI可解释性分析
+  ├── report_service.py 归因报告服务
+  ├── data_service.py   数据处理服务
+  ├── bootstrap.py      路径初始化 (web_app 依赖)
+  └── 启动说明.txt       本文件
+
+
+【前端修改后如何更新】
+
+  cd view\web-frontend
+  npm run build
+  cp -r dist\* ..\web_app\vue-dist\
+
+  然后刷新浏览器 (Ctrl+Shift+R)
+
+
+【显存管理 API】
+
+  GET  /api/vram              查看GPU显存状态
+  POST /api/model/unload      卸载模型释放显存
+  POST /api/model/reload      重载模型到GPU
+  POST /api/model/cleanup     完全清理(模型+姿态+缓存)
+
+
+【停止服务】
+
+  Get-Process python | Stop-Process -Force
+
+
+【端口】
+  8001 (唯一端口)
+
+
+【归档说明】
+  archive/ 目录存放旧的 Streamlit 演示系统:
+  - app.py           (旧 Streamlit 前端)
+  - api_server.py    (旧 API 服务)
+  - start_*.ps1      (旧启动脚本)
+  - web/             (旧 React 前端)

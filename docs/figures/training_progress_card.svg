@@ -1,0 +1,155 @@
+<svg width="2000" height="1200" viewBox="0 0 2000 1200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50"/>
+    </marker>
+    <linearGradient id="inputGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="poseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="rgbGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="fusionGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="2000" height="1200" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="1000" y="50" text-anchor="middle" font-size="32" font-weight="bold" fill="#2c3e50" font-family="Arial, sans-serif">Uni-Sign Framework Architecture</text>
+  <text x="1000" y="85" text-anchor="middle" font-size="18" fill="#7f8c8d" font-family="Arial, sans-serif">Unified Sign Language Understanding with Multimodal Fusion</text>
+
+  <!-- ===== INPUT LAYER ===== -->
+  <rect x="80" y="130" width="240" height="140" rx="12" fill="url(#inputGrad)" filter="url(#shadow)"/>
+  <text x="200" y="170" text-anchor="middle" font-size="18" font-weight="bold" fill="white" font-family="Arial, sans-serif">Input Video</text>
+  <text x="200" y="200" text-anchor="middle" font-size="14" fill="#ecf0f1" font-family="Arial, sans-serif">Continuous Sign</text>
+  <text x="200" y="225" text-anchor="middle" font-size="14" fill="#ecf0f1" font-family="Arial, sans-serif">Language Sequence</text>
+  <text x="200" y="250" text-anchor="middle" font-size="13" fill="#ecf0f1" font-family="Arial, sans-serif">T frames × H × W × 3</text>
+
+  <!-- Arrow down -->
+  <line x1="200" y1="270" x2="200" y2="320" stroke="#2c3e50" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- ===== POSE EXTRACTION ===== -->
+  <rect x="80" y="320" width="240" height="160" rx="12" fill="#34495e" filter="url(#shadow)"/>
+  <text x="200" y="360" text-anchor="middle" font-size="18" font-weight="bold" fill="white" font-family="Arial, sans-serif">Pose Extraction</text>
+  <text x="200" y="390" text-anchor="middle" font-size="13" fill="#ecf0f1" font-family="Arial, sans-serif">Whole-body Keypoints</text>
+  <text x="200" y="415" text-anchor="middle" font-size="12" fill="#bdc3c7" font-family="Arial, sans-serif">• Body: 11 joints</text>
+  <text x="200" y="438" text-anchor="middle" font-size="12" fill="#bdc3c7" font-family="Arial, sans-serif">• Left Hand: 21 keypoints</text>
+  <text x="200" y="461" text-anchor="middle" font-size="12" fill="#bdc3c7" font-family="Arial, sans-serif">• Right Hand: 21 keypoints</text>
+
+  <!-- Arrow right to decomposition -->
+  <line x1="320" y1="400" x2="400" y2="400" stroke="#2c3e50" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- ===== SUB-STRUCTURE DECOMPOSITION ===== -->
+  <rect x="400" y="280" width="320" height="240" rx="12" fill="#16a085" filter="url(#shadow)"/>
+  <text x="560" y="315" text-anchor="middle" font-size="18" font-weight="bold" fill="white" font-family="Arial, sans-serif">Sub-structure Decomposition</text>
+
+  <rect x="420" y="335" width="280" height="45" rx="6" fill="rgba(255,255,255,0.15)"/>
+  <text x="560" y="363" text-anchor="middle" font-size="14" fill="white" font-family="Arial, sans-serif">Body Branch: T × V_b × 3</text>
+
+  <rect x="420" y="390" width="280" height="45" rx="6" fill="rgba(255,255,255,0.15)"/>
+  <text x="560" y="418" text-anchor="middle" font-size="14" fill="white" font-family="Arial, sans-serif">Left Hand Branch: T × V_l × 3</text>
+
+  <rect x="420" y="445" width="280" height="45" rx="6" fill="rgba(255,255,255,0.15)"/>
+  <text x="560" y="473" text-anchor="middle" font-size="14" fill="white" font-family="Arial, sans-serif">Right Hand Branch: T × V_r × 3</text>
+
+  <!-- Arrows to pose encoder (4 branches) -->
+  <line x1="720" y1="360" x2="820" y2="280" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="6,4"/>
+  <line x1="720" y1="380" x2="820" y2="340" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="6,4"/>
+  <line x1="720" y1="440" x2="820" y2="500" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="6,4"/>
+  <line x1="720" y1="460" x2="820" y2="560" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="6,4"/>
+
+  <!-- ===== SPATIO-TEMPORAL POSE ENCODER ===== -->
+  <rect x="820" y="220" width="360" height="400" rx="12" fill="url(#poseGrad)" filter="url(#shadow)"/>
+  <text x="1000" y="255" text-anchor="middle" font-size="18" font-weight="bold" fill="white" font-family="Arial, sans-serif">Spatio-Temporal Pose Encoder</text>
+
+  <!-- Spatial ST-GCN -->
+  <rect x="840" y="280" width="320" height="130" rx="8" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <text x="1000" y="310" text-anchor="middle" font-size="15" font-weight="bold" fill="white" font-family="Arial, sans-serif">Spatial ST-GCN Module</text>
+  <text x="1000" y="335" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">Graph Convolution (spatial dimension)</text>
+  <text x="1000" y="355" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">Channel progression: 64 → 128 → 256</text>
+  <text x="1000" y="375" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">Adaptive adjacency matrix learning</text>
+  <text x="1000" y="395" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">Output shape: B × C × T × V</text>
+
+  <!-- Temporal ST-GCN -->
+  <rect x="840" y="430" width="320" height="130" rx="8" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <text x="1000" y="460" text-anchor="middle" font-size="15" font-weight="bold" fill="white" font-family="Arial, sans-serif">Temporal ST-GCN Module</text>
+  <text x="1000" y="485" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">Temporal convolution (kernel_size=5)</text>
+  <text x="1000" y="505" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">256 channels × 3 residual blocks</text>
+  <text x="1000" y="525" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">BatchNorm + ReLU activation</text>
+  <text x="1000" y="545" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">Output shape: B × 256 × T × V</text>
+
+  <!-- ===== BODY-AWARE ENHANCEMENT ===== -->
+  <rect x="1250" y="320" width="280" height="120" rx="12" fill="#e74c3c" filter="url(#shadow)"/>
+  <text x="1390" y="355" text-anchor="middle" font-size="16" font-weight="bold" fill="white" font-family="Arial, sans-serif">Body-Aware Enhancement</text>
+  <text x="1390" y="380" text-anchor="middle" font-size="13" fill="#ecf0f1" font-family="Arial, sans-serif">Hand features ← Body context</text>
+  <text x="1390" y="405" text-anchor="middle" font-size="13" fill="#ecf0f1" font-family="Arial, sans-serif">Face features ← Body context</text>
+  <text x="1390" y="430" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">Detached gradient flow</text>
+
+  <!-- Arrows from encoder to enhancement -->
+  <line x1="1180" y1="340" x2="1250" y2="360" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="1180" y1="520" x2="1250" y2="420" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- ===== RGB SUPPORT BRANCH ===== -->
+  <rect x="820" y="700" width="360" height="320" rx="12" fill="url(#rgbGrad)" filter="url(#shadow)"/>
+  <text x="1000" y="735" text-anchor="middle" font-size="18" font-weight="bold" fill="white" font-family="Arial, sans-serif">RGB Support Branch (Optional)</text>
+
+  <!-- Frame Sampling -->
+  <rect x="840" y="760" width="320" height="65" rx="8" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <text x="1000" y="790" text-anchor="middle" font-size="14" font-weight="bold" fill="white" font-family="Arial, sans-serif">Confidence-based Frame Sampling</text>
+  <text x="1000" y="812" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">Top-K or weighted selection strategy</text>
+
+  <!-- Hand Cropping -->
+  <rect x="840" y="840" width="320" height="65" rx="8" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <text x="1000" y="870" text-anchor="middle" font-size="14" font-weight="bold" fill="white" font-family="Arial, sans-serif">Hand Region Cropping</text>
+  <text x="1000" y="892" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">Dynamic bbox → 112×112 patches</text>
+
+  <!-- Visual Backbone -->
+  <rect x="840" y="920" width="320" height="65" rx="8" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <text x="1000" y="950" text-anchor="middle" font-size="14" font-weight="bold" fill="white" font-family="Arial, sans-serif">EfficientNet-B0 Backbone</text>
+  <text x="1000" y="972" text-anchor="middle" font-size="12" fill="#ecf0f1" font-family="Arial, sans-serif">Output: 1280 channels → proj to 256</text>
+
+  <!-- Arrow from input video to RGB branch -->
+  <path d="M 200 270 Q 200 600, 820 800" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)" fill="none" stroke-dasharray="8,5"/>
+  <text x="450" y="680" text-anchor="middle" font-size="12" fill="#2c3e50" font-family="Arial, sans-serif">Video frames</text>
+
+  <!-- ===== PGF MODULE ===== -->
+  <rect x="1250" y="500" width="380" height="280" rx="12" fill="#9b59b6" filter="url(#shadow)"/>
+  <text x="1440" y="535" text-anchor="middle" font-size="18" font-weight="bold" fill="white" font-family="Arial, sans-serif">Pose-Guided Fusion (PGF)</text>
+
+  <!-- Cross Attention -->
+  <rect x="1270" y="560" width="340" height="60" rx="8" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <text x="1440" y="590" text-anchor="middle" font-size="14" font-weight="bold" fill="white" font-family="Arial, sans-serif">Cross-Attention Alignment</text>
+  <text x="1440" y="610" text-anchor="middle" font-size="11" fill="#ecf0f1" font-family="Arial, sans-serif">Pose query + RGB key/value (h=8 heads)</text>
+
+  <!-- Deformable Attention -->
+  <rect x="1270" y="635" width="340" height="60" rx="8" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <text x="1440" y="665" text-anchor="middle" font-size="14" font-weight="bold" fill="white" font-family="Arial, sans-serif">Deformable Attention 2D</text>
+  <text x="1440" y="685" text-anchor="middle" font-size="11" fill="#ecf0f1" font-family="Arial, sans-serif">Learnable offsets + grid sampling</text>
+
+  <!-- Uncertainty Gate -->
+  <rect x="1270" y="710" width="340" height="60" rx="8" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <text x="1440" y="740" text-anchor="middle" font-size="14" font-weight="bold" fill="white" font-family="Arial, sans-serif">Reliability-Aware Gating</text>
+  <text x="1440" y="760" text-anchor="middle" font-size="11" fill="#ecf0f1" font-family="Arial, sans-serif">α·Fused + (1-α)·Pose (adaptive fusion)</text>
+
+  <!-- Arrows to PGF -->
+  <line x1="1180" y1="420" x2="1250" y2="580" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="1210" y="490" text-anchor="middle" font-size="11" fill="#2c3e50" font-family="Arial, sans-serif">Pose feat</text>
+
+  <line x1="1180" y1="860" x2="1250" y2="720" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="1210" y="800" text-anchor="middle" font-size="11" fill="#2c3e50" font-family="Arial, sans-serif">RGB feat</text>
+
+  <!-- ===== FEATURE AGGREGATION ===== -->
+  <rect x="1700" y

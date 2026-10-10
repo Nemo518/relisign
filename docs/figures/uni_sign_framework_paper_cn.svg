@@ -1,0 +1,100 @@
+00<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#333333"/>
+    </marker>
+    <style>
+      .title { font: 700 28px 'Microsoft YaHei', 'PingFang SC', sans-serif; fill:#111; }
+      .subtitle { font: 700 18px 'Microsoft YaHei', 'PingFang SC', sans-serif; fill:#222; }
+      .label { font: 600 16px 'Microsoft YaHei', 'PingFang SC', sans-serif; fill:#1d1d1d; }
+      .small { font: 500 14px 'Microsoft YaHei', 'PingFang SC', sans-serif; fill:#333; }
+      .box { stroke-width:2; rx:18; ry:18; }
+      .dashed { stroke-dasharray:10 8; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="900" fill="#ffffff"/>
+  <text x="30" y="50" class="title">(a) 中文框架总览</text>
+  <text x="1140" y="50" class="title">(b) CE-CSL 适配与训练主线</text>
+
+  <line x1="1080" y1="70" x2="1080" y2="840" stroke="#999" stroke-width="3" stroke-dasharray="10 10"/>
+
+  <rect x="60" y="90" width="950" height="85" fill="#f7fbff" stroke="#7aa7d9" class="box dashed"/>
+  <text x="90" y="125" class="subtitle">输入目标</text>
+  <text x="210" y="125" class="small">将连续手语视频映射为中文文本或 Gloss 序列，支撑比赛演示、微调训练与论文实验。</text>
+  <text x="210" y="152" class="small">当前优先主线：CE-CSL + pose-only + SLT</text>
+
+  <rect x="80" y="230" width="170" height="90" fill="#eef5ff" stroke="#5c89c9" class="box"/>
+  <text x="135" y="268" class="label">手语视频输入</text>
+  <text x="116" y="294" class="small">本地视频 / CE-CSL</text>
+
+  <rect x="80" y="390" width="170" height="120" fill="#fef7ea" stroke="#d7a444" class="box"/>
+  <text x="122" y="430" class="label">姿态提取</text>
+  <text x="108" y="458" class="small">身体关键点</text>
+  <text x="108" y="482" class="small">左右手关键点</text>
+  <text x="108" y="506" class="small">面部关键点</text>
+
+  <rect x="320" y="390" width="210" height="120" fill="#f4fbf6" stroke="#69a57b" class="box"/>
+  <text x="380" y="430" class="label">数据适配层</text>
+  <text x="352" y="458" class="small">labels.train/dev/test</text>
+  <text x="352" y="482" class="small">pose_format/*.pkl</text>
+  <text x="360" y="506" class="small">CE_CSL 数据注册</text>
+
+  <rect x="600" y="350" width="190" height="85" fill="#fdecef" stroke="#d96c82" class="box"/>
+  <text x="647" y="386" class="label">姿态分支编码</text>
+  <text x="632" y="413" class="small">body / left / right / face</text>
+
+  <rect x="600" y="470" width="190" height="85" fill="#eef8ef" stroke="#6fa86c" class="box dashed"/>
+  <text x="652" y="506" class="label">可选 RGB 分支</text>
+  <text x="642" y="533" class="small">视频帧视觉特征</text>
+
+  <rect x="850" y="340" width="180" height="230" fill="#fff8ea" stroke="#d5a038" class="box"/>
+  <text x="890" y="390" class="label">Uni-Sign 编码器</text>
+  <text x="890" y="428" class="small">时序建模</text>
+  <text x="890" y="456" class="small">多分支融合</text>
+  <text x="875" y="484" class="small">统一手语语义表示</text>
+  <text x="885" y="512" class="small">支持 SLT / CSLR / ISLR</text>
+
+  <rect x="180" y="650" width="780" height="80" fill="#f7f7f7" stroke="#c8c8c8" class="box"/>
+  <text x="455" y="695" class="label">特征拼接与统一表示传递到生成式语言模型</text>
+
+  <rect x="250" y="770" width="620" height="85" fill="#f9eee8" stroke="#ca8b62" class="box"/>
+  <text x="475" y="810" class="label">mT5 生成式语言解码器</text>
+  <text x="375" y="837" class="small">根据手语编码结果生成中文句子或 Gloss 序列</text>
+
+  <rect x="1120" y="120" width="400" height="90" fill="#eef5ff" stroke="#5c89c9" class="box"/>
+  <text x="1240" y="158" class="label">数据准备</text>
+  <text x="1160" y="186" class="small">原始视频 + label_cleaned CSV + mt5-base + 现成 checkpoint</text>
+
+  <rect x="1120" y="250" width="400" height="90" fill="#f4fbf6" stroke="#69a57b" class="box"/>
+  <text x="1236" y="288" class="label">预处理</text>
+  <text x="1175" y="316" class="small">prepare_cecsl_labels.py / prepare_cecsl_pose.py / check_cecsl_dataset.py</text>
+
+  <rect x="1120" y="380" width="400" height="100" fill="#fdecef" stroke="#d96c82" class="box"/>
+  <text x="1208" y="420" class="label">第一阶段训练</text>
+  <text x="1165" y="448" class="small">CE-CSL + pose-only + SLT</text>
+  <text x="1170" y="472" class="small">fine_tuning.py + DeepSpeed</text>
+
+  <rect x="1120" y="530" width="400" height="90" fill="#fff8ea" stroke="#d5a038" class="box"/>
+  <text x="1230" y="568" class="label">训练输出</text>
+  <text x="1180" y="596" class="small">out/cecsl_stage3_pose_only/best_checkpoint.pth</text>
+
+  <rect x="1120" y="670" width="400" height="110" fill="#efeafd" stroke="#7b61d1" class="box"/>
+  <text x="1236" y="710" class="label">验证与应用</text>
+  <text x="1185" y="738" class="small">test_cecsl_forward.py 抽样验证</text>
+  <text x="1185" y="762" class="small">online_inference.py 比赛展示</text>
+
+  <line x1="165" y1="320" x2="165" y2="390" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="250" y1="450" x2="320" y2="450" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="530" y1="450" x2="600" y2="392" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="530" y1="450" x2="600" y2="512" stroke="#4f8b62" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#arrow)"/>
+  <line x1="790" y1="392" x2="850" y2="392" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="790" y1="512" x2="850" y2="512" stroke="#4f8b62" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#arrow)"/>
+  <line x1="940" y1="570" x2="940" y2="650" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="560" y1="730" x2="560" y2="770" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <line x1="1320" y1="210" x2="1320" y2="250" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="1320" y1="340" x2="1320" y2="380" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="1320" y1="480" x2="1320" y2="530" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="1320" y1="620" x2="1320" y2="670" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>
